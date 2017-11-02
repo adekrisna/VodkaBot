@@ -9,7 +9,7 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 
 client = LineClient()
-client._qrLogin("line://au/q/")
+client._tokenLogin("EmSKNjmDkXd6pGht0xU5.ydnDLmEJYJO8nOx1fxjbrq.DoMyYSjOodih93EJtHgPDD8zKFLGggyXStF+cKeC2Aw=")
 
 profile, setting, tracer = client.getProfile(), client.getSettings(), LineTracer(client)
 offbot, messageReq, wordsArray, waitingAnswer = [], {}, {}, {}
@@ -50,7 +50,7 @@ tracer.addOpInterrupt(5,NOTIFIED_ADD_CONTACT)
 def NOTIFIED_ACCEPT_GROUP_INVITATION(op):
     #print op
     try:
-        sendMessage(op.param1, client.getContact(op.param2).displayName + "WELCOME to " + group.name)
+        sendMessage(op.param1, client.getContact(op.param2).displayName + "Selamat Datang di Room FS3I Family semoga betah ya, no baper, no rusuh, no ngeyel dan jgn nakal, ok!!! " + "(Silahkan cek note)")
     except Exception as e:
         print e
         print ("\n\nNOTIFIED_ACCEPT_GROUP_INVITATION\n\n")
@@ -60,7 +60,7 @@ tracer.addOpInterrupt(17,NOTIFIED_ACCEPT_GROUP_INVITATION)
 
 def NOTIFIED_KICKOUT_FROM_GROUP(op):
     try:
-        sendMessage(op.param1, client.getContact(op.param3).displayName + " Good Bye\n(*´･ω･*)")
+        sendMessage(op.param1, client.getContact(op.param3).displayName + " Selamat Tinggal, Bye\n(*´･ω･*)")
     except Exception as e:
         print e
         print ("\n\nNOTIFIED_KICKOUT_FROM_GROUP\n\n")
@@ -70,7 +70,7 @@ tracer.addOpInterrupt(19,NOTIFIED_KICKOUT_FROM_GROUP)
 
 def NOTIFIED_LEAVE_GROUP(op):
     try:
-        sendMessage(op.param1, client.getContact(op.param2).displayName + " Good Bye\n(*´･ω･*)")
+        sendMessage(op.param1, client.getContact(op.param2).displayName + " Selamat Tinggal, Bye\n(*´･ω･*)")
     except Exception as e:
         print e
         print ("\n\nNOTIFIED_LEAVE_GROUP\n\n")
@@ -219,7 +219,7 @@ def SEND_MESSAGE(op):
                 if msg.text == "gift":
                     sendMessage(msg.to, text="gift sent", contentMetadata=None, contentType=9)
                 if msg.text == "set":
-                    sendMessage(msg.to, "I have set a read point ♪\n「tes」I will show you who I have read ♪")
+                    sendMessage(msg.to, "Udah di set Bos buat a read point ♪\n「tes」cek tes buat mengetahui siapa aja yg ngintip ♪")
                     try:
                         del wait['readPoint'][msg.to]
                         del wait['readMember'][msg.to]
@@ -240,11 +240,86 @@ def SEND_MESSAGE(op):
                                 print rom
                                 chiya += rom[1] + "\n"
 
-                        sendMessage(msg.to, "People who readed %s\nthat's it\n\nPeople who have ignored reads\n%sIt is abnormal ♪\n\nReading point creation date n time:\n[%s]"  % (wait['readMember'][msg.to],chiya,setTime[msg.to]))
+                        sendMessage(msg.to, "Woy woy jgn ngintip doang %s\nthat's it\n\nSiapa saja yang ngintip\n%sIt is abnormal ♪\n\nYang read doang date n time:\n[%s]"  % (wait['readMember'][msg.to],chiya,setTime[msg.to]))
                     else:
-                        sendMessage(msg.to, "An already read point has not been set.\n「set」you can send ♪ read point will be created ♪")
+                        sendMessage(msg.to, "Buat read point belum di set Bos .\n「set」you can send ♪ read point will be created ♪")
                 else:
                     pass
+#--------------------------------------------------------------
+                if msg.text == "Mulai":
+                    print "ok"
+                    _name = msg.text.replace("Mulai","")
+                    gs = client.getGroup(msg.to)
+                    sendMessage(msg.to,"Kick By Kris - thea\nsaya tidak bertanggung jawab atas grup anda rata karena bot ini, silahkan kalian intropeksi sendiri saja\nTerimakasih")
+                    targets = []
+                    for g in gs.members:
+                        if _name in g.displayName:
+                            targets.append(g.mid)
+                    if targets == []:
+                        sendMessage(msg.to,"error")
+                    else:
+                        for target in targets:
+                            try:
+                                klist=[client]
+                                kicker=random.choice(klist)
+                                kicker.kickoutFromGroup(msg.to,[target])
+                                print (msg.to,[g.mid])
+                            except:
+                                sendText(msg.to,"error")
+#-------------------------------------------------------------			
+		if msg.text == "cek":
+                    start = time.time()
+                    sendMessage(msg.to, "ahay")
+                    elapsed_time = time.time() - start
+                    sendMessage(msg.to, "%sseconds" % (elapsed_time))
+#-------------------------------------------------------------
+                if msg.text == "Spam":
+                    sendMessage(msg.to,"No Baper")
+                    sendMessage(msg.to,"No Rusuh")
+                    sendMessage(msg.to,"No Ngeyel")
+                    sendMessage(msg.to,"No Bulshit")
+                    sendMessage(msg.to,"No Byk Alasan")
+                    sendMessage(msg.to,"No Nakal")
+                    sendMessage(msg.to,"Keep Enjoy")
+                    sendMessage(msg.to,"Just Happy")
+                    sendMessage(msg.to,"Sekedar Hiburan Jgn Dimasukin Hati")
+                    sendMessage(msg.to,"Jaga Kekompakan")
+                    sendMessage(msg.to,"Jaga Solideritas Teman")
+                    sendMessage(msg.to,"“Menghargai” itu Sifat paling hebat!")
+                    sendMessage(msg.to,"Ekpresikanlah Kreatifitasmu")
+                    sendMessage(msg.to,"Jadi Org Jujurlah dari sekarang juga, Jujur pada Porsinya")
+                    sendMessage(msg.to,"SPAM IS DONE")
+                    sendMessage(msg.to,"Created By : Kris - thea")
+                    sendMessage(msg.to,"Don't panix, just relax, it's ok wae ya... wasyik!!!!!!")
+#-------------------------------------------------------------
+    #-------------Fungsi Tag All Start---------------#
+            if msg.text in ["Hai sob"]:
+                  group = client.getGroup(msg.to)
+                  nama = [contact.mid for contact in group.members]
+
+                  cb = ""
+                  cb2 = ""
+                  strt = int(0)
+                  akh = int(0)
+                  for md in nama:
+                      akh = akh + int(6)
+
+                      cb += """{"S":"""+json.dumps(str(strt))+""","E":"""+json.dumps(str(akh))+""","M":"""+json.dumps(md)+"},"""
+
+                      strt = strt + int(7)
+                      akh = akh + 1
+                      cb2 += "@nrik \n"
+
+                  cb = (cb[:int(len(cb)-1)])
+                  msg.contentType = 0
+                  msg.text = cb2
+                  msg.contentMetadata ={'MENTION':'{"MENTIONEES":['+cb+']}','EMTVER':'4'}
+
+                  try:
+                      client.sendMessage(msg)
+                  except Exception as error:
+                      print error
+    #-------------Fungsi Tag All Finish---------------#
         else:
             pass
 
